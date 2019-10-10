@@ -1,0 +1,219 @@
+body {
+  overflow-x: hidden;
+  position: relative; /**for scrollspy**/
+  } 
+
+  .projectName {
+    text-transform: uppercase;
+    font-family: 'Fjalla One', sans-serif;
+  }
+
+  #nav {
+    font-family: 'Fjalla One', sans-serif;
+    letter-spacing: 2px;
+  }
+
+  .projectName a {
+    letter-spacing: 2px;
+    color: white;
+  }
+
+#home {
+    text-align: center;
+    color: white;
+    margin: 0 auto;
+}  
+
+#home img {
+  margin-top: 150px;
+}
+
+  @media (max-width: 768px) {
+   #home img {
+    
+  }
+}
+  #home h3 {
+    margin-top: 20px;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 75px;
+    text-shadow: 2px 2px 4px black;
+    letter-spacing: 2px;
+  }
+
+  #home p {
+    font-size: 23px;
+    font-family: 'Fjalla One', sans-serif;
+    text-shadow: 1px 1px 2px black;
+  }
+
+  @media(min-width:600px) {
+  #home {
+  background-image: url("../img/img2.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 727px; /**for parallax**/
+}
+  #contact{
+    background: url("../img/img2.jpg");
+    min-height: 100%;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    height: 340px; /**for parallax**/
+  }
+}  
+  
+  @media(max-width:600px) {
+  #home {
+    background-image: url("../img/img3.jpg");
+    height: 600px;
+  }  
+  #contact {
+    background-image: url("../img/img3.jpg");
+    height: 340px;
+  }
+}
+
+
+  /*****ABOUT PAGE CSS*****/
+
+   #about {
+    font-family: 'Fjalla One', sans-serif;
+    margin: 0 auto;
+    background-color: #610202;
+    text-align: center;
+    color: white; 
+  }
+
+  .header1 h1 {
+    text-align: center;
+    padding-top: 80px;
+    padding-bottom: 20px;
+    font-size: 80px;
+    text-shadow: 1px 1px 2px gray;
+    
+  }
+
+  #about h3 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #f7b733;
+    text-shadow: 1px 1px 2px gray;
+    text-align: center;
+    left:40%;
+  }
+
+  #about p {
+    font-family: 'Source Sans Pro';
+    font-size: 20px;
+    text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    padding-bottom: 30px;
+  }
+
+  .modal-button {
+    text-align: center;
+  }
+
+
+   #button {
+    height:20px; 
+    width:100px; 
+    position:relative;
+    top:50%; 
+    left:47%;
+    padding-top: 28px;
+    padding-bottom: 100px;
+    margin-left: -60px;
+  }
+
+  #myModalLabel{
+    text-align: left;
+  }
+ 
+  /***** WORK PAGE CSS *****/
+
+  #work {
+    margin: 10% 12%;
+    margin-bottom: 5%;
+    text-align: center;
+    font-family:Source Sans Pro;
+  }
+  
+  #work p {
+    margin-right: 8%;
+    margin-left: 8%;
+  }
+
+  .workheader h1{
+    font-family: 'Fjalla One', sans-serif;
+    text-align: center;
+    font-size: 80px;
+    color: #3f3f3f;
+    text-shadow: 1px 1px 2px black;
+    padding-bottom: 50px;
+  }
+
+  .afterworks{
+    color: white;
+  }
+
+
+  @media (max-width: 610px) {
+  #work p {
+    margin-right: 1%;
+    margin-left: 1%;
+   }
+  #work {
+    margin: 6%;
+    padding-top: 20px;
+  }
+  }
+  
+  /***** CONTACT PAGE CSS *****/
+  #contact {
+    clear: both;
+    font-family: 'Fjalla One', sans-serif;
+    margin: 0 auto;
+  }
+
+  .header {
+    text-align: center;
+    color: #ffffff;
+    padding-top: 7%;
+  }
+
+  .header h1 {
+    font-family: 'Fjalla One', sans-serif;
+    text-shadow: 2px 2px 4px black;
+    font-size: 550%;
+    -webkit-margin-after: 0em;
+    -webkit-margin-before: 0.5em;
+    padding-bottom: 18px;
+  }
+
+  #contact a {
+    color: #376e6f;
+  }
+
+  .info {
+    text-align: center;
+    padding-top: 200px;
+    padding-bottom: 150px;
+  }
+
+  .info p {
+    font-size: 20px;
+    color: black;
+    font-family: 'Source Sans Pro';
+  }
+
+  .info h3 {
+    font-size: 50px;
+    color: #ecb807;
+  }

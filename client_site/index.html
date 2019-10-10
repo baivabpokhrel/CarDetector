@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+  <title>OPENSPOT</title>
+  <!-- Bootstrap core CSS -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <!-- Custom styles for this template go here -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Source Sans Pro' rel='stylesheet'>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body data-spy="scroll" data-target=".navbar">
+   <div id="wrapper">
+
+  <!-- data-spy="scroll" data-target=".navbar" are for scrollspy
+  (shows the section you're on as highlighted in your navigation bar)-->
+
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid"> <!--to make the navigation bar stretch across the entire page-->
+
+      <!--hamburger menu-->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <div class="projectName navbar-brand">
+          <a href="#">OpenSpot</a>
+        </div> <!--end projectName -->
+
+      </div> <!--end navbar-header -->
+
+      <div class="navbar-collapse collapse" id= "nav">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#work">Spot Locator</a></li>
+          <li><a href="#about">Our Technologies</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid" id="home">
+
+            <img src="img/logo.png" style="width:300px">
+            <h3>OpenSpot</h3>
+            <p>Parking Solutions</p>
+
+  </div>
+  <!-- ============================= -->
+    <section id="work">
+
+      <div class="workheader">
+        <h1> Parking Locator </h1>
+        <p> <br> </p>
+<div style="font-size: 25px;">
+        <form>
+  Select your parking lot:
+  <select id="mySelect">
+    <option value="55<br>209">Home Depot</option>
+    <option value="45<br>34<br>64">Walmart</option>
+    <option value="89<br>12">Walgreens</option>
+    <option value="23<br>30<br>103">City College</option>
+  </select>
+</form>
+
+<p>Click the button to return avaliable spots.</p>
+
+<button class="btn btn-warning center-block" type="button" onclick="myFunction()">Search</button>
+
+<p style="padding-top: 27px;font-family: 'Fjalla One', sans-serif;"> Avaliable Spots: </p>
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("mySelect").value;
+  document.getElementById("demo").innerHTML = x;
+}
+</script>
+</div>
+      </div>
+
+      <div class="afterworks">
+        <p> . </p>
+      </div>
+
+
+    </section><!-- locator container -->
+ <!-- ============================= -->
+    <section id="about">
+  <div class="container">
+    <div class="header1">
+      <h1>Our Techologies</h1>
+    </div><!-- end header -->
+    <div style="padding-bottom: 100px;">
+          <img style="width: 200px;" src="img/tech1.png"> 
+          <img style="width: 200px;" src="img/tech2.png"> 
+    </div>
+  </section>
+    <!-- ============================= -->
+   
+    <section id="contact">
+
+      <div class="header">
+        <h1>Parking Made Easy. </h1>
+      </div><!-- end header -->
+
+      <div class="info">
+        <div class='col-sm-12 col-md-6'style="padding-bottom: 100px">
+
+        <h3 style="color:black; font-size:40px;">CONTACT</h3>
+
+        <h3><span class="glyphicon glyphicon-envelope"></span><a href='mailto:OPENSPOT@gmail.com'> Email</a></h3>
+        <p>OPENSPOT@GMAIL.COM</p>
+  </div>
+  <div class='col-sm-12 col-md-6'style="padding-bottom: 100px">
+        <h3 style="color:black; font-size:40px;">Follow Us:<h3>
+          <img src="img/icon1.png">
+          <img src="img/icon2.png">
+          <img src="img/icon3.png">
+</div>
+      </div><!-- end info -->
+    </section>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+      </div>
+      </body>
+      </html>
