@@ -1,3 +1,5 @@
+You will need to download the mask_rcnn_coco.h5 and put it into openSpotServer/carDetection/
+
 Useful Commands
 
 pip3 install -r requirements.txt
