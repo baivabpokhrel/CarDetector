@@ -2,6 +2,7 @@ import os
 import numpy as np
 import cv2
 import mrcnn.config
+from mrcnn import visualize
 import mrcnn.utils
 from mrcnn.model import MaskRCNN
 from IPython.display import Image
@@ -81,7 +82,21 @@ def find_cars(image_path):
         # Draw the box
         cv2.rectangle(crop, (x1, y1), (x2, y2), (0, 255, 0), 1)
 
-    cv2.imwrite(image_path, crop)
+    #cv2.imwrite(image_path, crop)
     # cv2.destroyAllWindows()
     # Image('car_output.jpg')
     # return 'car_output.jpg'
+
+    COLOR=[0,1,0]
+
+    # loop over of the detected object's bounding boxes and masks
+    for i in range(0, r["rois"].shape[0]):
+        # extract the class ID and mask for the current detection, then
+        # grab the color to visualize the mask (in BGR format)
+        classID = r["class_ids"][i]
+        mask = r["masks"][:, :, i]
+        color=COLOR
+
+        # visualize the pixel-wise mask of the object
+        image_mask = visualize.apply_mask(crop, mask,color, alpha=0.5)
+    cv2.imwrite(image_path, image_mask)
