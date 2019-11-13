@@ -20,4 +20,3 @@ cv2.imwrite('maskedParkingLotOverlay.jpg', image)
 image = get_mask_array_of_parking_spot(gray_image, parkingSpots.spot_15, 255) # 255 shows up as white on image 
 
 cv2.imwrite('maskedParkingSpot.jpg', image)
-
