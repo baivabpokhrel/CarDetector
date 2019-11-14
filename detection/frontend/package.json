@@ -23,12 +23,9 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "yarn lint:fix"
     }
   },
-  “lint-staged”: {
-  “*.js”: [“./node_modules/.bin/eslint — fix”, “git add”]
-}
   "eslintConfig": {
     "extends": "react-app"
   },
