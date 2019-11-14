@@ -15,10 +15,20 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "lint": "node ./node_modules/eslint/bin/eslint.js ./",
+    "lint:fix": "node ./node_modules/eslint/bin/eslint.js --fix ./",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  “lint-staged”: {
+  “*.js”: [“./node_modules/.bin/eslint — fix”, “git add”]
+}
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -40,6 +50,8 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
-    "eslint-plugin-react-hooks": "^1.7.0"
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "husky": "^3.0.9",
+    "lint-staged": "^9.4.3"
   }
 }
