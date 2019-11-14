@@ -1,22 +1,31 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+} from 'react-router-dom';
 import './App.css';
-import { SpotCount } from './components';
+import { SettingsView, HomeView } from './views';
 
-const App = () =>  {
-  const [count, setCount] = useState(0);
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Parking Spot Detector</h1>
-      </header>
-      <div>
-        <button onClick={() => setCount(count+1)}>+</button>
-          <button onClick={() => setCount(count-1)}>-</button>
+const App = () => (
+  <div className="App">
+    <header className="App-header">
+      <h1>Open Spot</h1>
+      <h2>Parking Solutions</h2>
+    </header>
+    <Router>
+      <Switch>
+        <Route path="/settings">
+          <SettingsView />
+        </Route>
+        <Route path="/">
+          <HomeView />
+        </Route>
+      </Switch>
+    </Router>
 
-        <SpotCount count={count}/>
-      </div>
-    </div>
-  );
-}
+  </div>
+);
 
 export default App;

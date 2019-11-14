@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled'
 const Counter = styled('h2')`
 font-size: 35px;
@@ -13,4 +14,7 @@ const SpotCount  = ({count}) => {
   )
 }
 
+SpotCount.propTypes = {
+  count: PropTypes.number
+}
 export default SpotCount;
