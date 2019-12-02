@@ -43,7 +43,7 @@
         </button>
 
         <div class="projectName navbar-brand">
-          <a href="#">OpenSpot</a>
+          <div><a href="#">OpenSpot</a> &nbsp<img src="img/logo.png"></div>
         </div> <!--end projectName -->
 
       </div> <!--end navbar-header -->
@@ -59,47 +59,53 @@
     </div>
   </nav>
 
-  <div class="container-fluid" id="home">
+  <!--<div class="container-fluid" id="home">
 
             <img src="img/logo.png" style="width:300px">
             <h3>OpenSpot</h3>
             <p>Parking Solutions</p>
 
-  </div>
+  </div>-->
   <!-- ============================= -->
     <section id="work">
 
       <div class="workheader">
         <h1> Parking Locator </h1>
         <p> <br> </p>
-<div style="font-size: 25px;">
-        <form>
-  Select your parking lot:
-  <select id="mySelect">
-    <option value="55<br>209">Home Depot</option>
-    <option value="45<br>34<br>64">Walmart</option>
-    <option value="89<br>12">Walgreens</option>
-    <option value="23<br>30<br>103">City College</option>
-  </select>
-</form>
+        </div>
 
-<p>Click the button to return avaliable spots.</p>
 
-<button class="btn btn-warning center-block" type="button" onclick="myFunction()">Search</button>
+        <div class='col-sm-12 col-md-6'>
+          <div style="font-size: 25px;">
+                <form>
+          Select OpenSpot Parking Lot:
+          <select id="mySelect">
+            <option value="3 <br> 7 <br> 12 <br> 16 <br> 17">Test Lot</option>
+          </select>
+        </form>
+        
 
-<p style="padding-top: 27px;font-family: 'Fjalla One', sans-serif;"> Avaliable Spots: </p>
-<p id="demo"></p>
+        <button class="btn btn-warning center-block" style="margin-top: 10px;" type="button" onclick="myFunction()">Search</button>
 
-<script>
-function myFunction() {
-  var x = document.getElementById("mySelect").value;
-  document.getElementById("demo").innerHTML = x;
-}
-</script>
-</div>
-      </div>
+        <p style="margin-top: 10px; font-family: 'Fjalla One', sans-serif;"> There are <u> 6</u> of <u> 18</u> spots avaliable: </p>
+        <p id="demo"></p>
 
-      <div class="afterworks">
+        <script>
+        function myFunction() {
+          var x = document.getElementById("mySelect").value;
+          document.getElementById("demo").innerHTML = x;
+        }
+        </script>
+        </div>
+        </div>
+
+        <div class='col-sm-12 col-md-6'>
+          <img class="responsive" id="parkingLotImage" src="img/car.jpeg">
+        </div>
+
+      
+
+      <div class="afterworks" style="margin-bottom: 150px;">
         <p> . </p>
       </div>
 
