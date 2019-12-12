@@ -134,7 +134,7 @@ def find_cars(image_object):
     for i in emptySpots:
         newImage = visualize.apply_mask(newImage, i,green, alpha=0.5) 
 
-    maskedParkingLot = Image(description= image_object.description + "_masked", image = new_image)
+    maskedParkingLot = Image(description= image_object.description + "_masked", image = newImage)
 
     try:
         oldImageMasked = Image.objects.get(description = image_object.description + "_masked")
