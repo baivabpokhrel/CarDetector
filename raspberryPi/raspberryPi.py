@@ -43,6 +43,9 @@ while True :
     print("Taking an image")
     camera.capture(static_image_path + static_image_file)
     print("Done taking an image")
-    upload_image()
-    print("Image is sent")
+    try:
+        print("Sending image")
+        upload_image()
+    except requests.exceptions.ConnectionError:
+        print("Error uploading")
     sleep(30)
