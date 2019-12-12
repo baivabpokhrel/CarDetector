@@ -24,6 +24,7 @@ def upload_image():
             )
 
 
+print("Setting up the camera")
 # Light Mode 
 # camera = PiCamera()
 # camera.resolution = (2592, 1944)
@@ -36,8 +37,12 @@ camera.iso = 800
 camera.exposure_mode = 'off'
 sleep(2)
 
+print("Setting up complete")
+
 while True :
+    print("Taking an image")
     camera.capture(static_image_path + static_image_file)
+    print("Done taking an image")
     upload_image()
-    print("Image sent")
+    print("Image is sent")
     sleep(30)
