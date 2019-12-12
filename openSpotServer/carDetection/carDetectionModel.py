@@ -78,6 +78,7 @@ def find_cars(image_path):
 
     rgb = cv2.imread(image_path)
     crop = rgb[crop_y:crop_y+crop_h, crop_x:crop_x+crop_w]
+    cv2.imwrite(image_path, crop)
 
     # Run the image through the Mask R-CNN model to get results.
     results = model.detect([crop], verbose=0)
@@ -129,4 +130,4 @@ def find_cars(image_path):
     for i in emptySpots:
         new_image = visualize.apply_mask(new_image, i,green, alpha=0.5)  
         
-    cv2.imwrite(image_path, new_image)
+    cv2.imwrite(image_path + "_masked", new_image)
