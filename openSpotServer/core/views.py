@@ -16,18 +16,25 @@ def home(request):
     return render(request, 'home.html', {'images': images})
 
 
-def custom_save(image_form):
-    image = image_form.save(commit=False)
-    image.save()
-    return image
+def upsert(image_form):
+    new_image = image_form.save(commit=False)
+    try:
+        old_image = Image.objects.get(description = new_image.description)
+        old_image.image.delete()
+        old_image.delete()
+        new_image.save()
+    except Image.DoesNotExist:
+        new_image.save()
+
+    return new_image
 
 
 def model_form_upload(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
-            image_object = custom_save(form)
-            find_cars(image_object.image.path)
+            image_object = upsert(form)
+            find_cars(image_object)
             return redirect('home')
     else:
         form = ImageForm()
