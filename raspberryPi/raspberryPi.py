@@ -8,7 +8,7 @@ static_image_file = static_camera_identifier + '.jpg'
 static_image_path = '/home/pi/openspot/'
 
 def upload_image():
-    with open(static_image_file, "rb") as image:
+    with open(static_image_path + static_image_file, "rb") as image:
         s = requests.Session()
         # fetch the CSRF cookie
         r1 = s.get(static_url)
