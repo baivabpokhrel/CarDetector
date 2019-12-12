@@ -135,7 +135,7 @@ def find_cars(image_object):
 
 
     maskedImageDescription = image_object.description + '_masked'
-    maskedParkingLotpath = maskedImageDescription + ".jpg"
+    maskedParkingLotpath = "media/images/"+maskedImageDescription + ".jpg"
 
     try:
         oldImageMasked = Image.objects.get(description = maskedImageDescription)
