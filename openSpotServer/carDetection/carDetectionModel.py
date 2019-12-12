@@ -137,7 +137,9 @@ def find_cars(image_object):
     maskedParkingLot = Image(description= image_object.description + "_masked", image = newImage)
 
     try:
-        oldImageMasked = Image.objects.get(description = image_object.description + "_masked")
+        newDescription = image_object.description + "_masked"
+        print(newDescription)
+        oldImageMasked = Image.objects.get(description = newDescription)
         oldImageMasked.image.delete()
         oldImageMasked.delete()
         maskedParkingLot.save()
