@@ -1,11 +1,12 @@
 import requests
+from fractions import Fraction
 from picamera import PiCamera
 from time import sleep
 
 static_url = 'http://35.245.175.140/model_form_upload'
 static_camera_identifier = 'openspot_deployed_camera_001'
 static_image_file = static_camera_identifier + '.jpg'
-static_image_path = '/home/pi/openspot/'
+static_image_path = '/home/pi/CarDetector/raspberryPi'
 
 def upload_image():
     with open(static_image_path + static_image_file, "rb") as image:
@@ -23,13 +24,17 @@ def upload_image():
             )
 
 
+# Light Mode 
+# camera = PiCamera()
+# camera.resolution = (2592, 1944)
+# camera.framerate = 15
 
-camera = PiCamera()
-
-#camera.rotation = 180
-# camera.start_preview(alpha=200)
-camera.resolution = (2592, 1944)
-camera.framerate = 15
+# Dark Mode
+camera = PiCamera(resolution=(2592, 1944),  framerate=Fraction(1, 6))
+camera.shutter_speed = 6000000
+camera.iso = 800
+camera.exposure_mode = 'off'
+sleep(2)
 
 while True :
     camera.capture(static_image_path + static_image_file)

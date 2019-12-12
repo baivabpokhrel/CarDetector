@@ -1,5 +1,5 @@
 import cv2
-import parkingSpots
+from parkingSpots import spot_list 
 from parkingSpotMask import ( get_mask_image_of_parking_spot, get_mask_array_of_parking_spot)
 
 # 0 Flag stands for grayscale.
@@ -10,13 +10,12 @@ from parkingSpotMask import ( get_mask_image_of_parking_spot, get_mask_array_of_
 image = cv2.imread('parkingLot.jpg')
 gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 																				 # Defult : white
-image = get_mask_image_of_parking_spot(image, parkingSpots.spot_15, (0, 0, 255)) # Red
-image = get_mask_image_of_parking_spot(image, parkingSpots.spot_16, (0, 0, 255)) # Red
-image = get_mask_image_of_parking_spot(image, parkingSpots.spot_17, (0, 255, 0)) # Green
+for spot in spot_list:
+	image = get_mask_image_of_parking_spot(image, spot, (0, 0, 255)) # Red
 
 cv2.imwrite('maskedParkingLotOverlay.jpg', image)
 
-																			  # Defult : 1 (shows up as dark grey on image)
-image = get_mask_array_of_parking_spot(gray_image, parkingSpots.spot_15, 255) # 255 shows up as white on image 
+																	  # Defult : 1 (shows up as dark grey on image)
+image = get_mask_array_of_parking_spot(gray_image, spot_list[0], 255) # 255 shows up as white on image 
 
 cv2.imwrite('maskedParkingSpot.jpg', image)

@@ -3,7 +3,6 @@ import numpy as np
 import cv2
 import mrcnn.config
 from mrcnn import visualize
-import imutils
 import mrcnn.utils
 from mrcnn.model import MaskRCNN
 from IPython.display import Image
@@ -12,6 +11,7 @@ sys.path.insert(0,'..')
 
 from parkingSpot.parkingSpotMask import ( get_mask_image_of_parking_spot, get_mask_array_of_parking_spot)
 from parkingSpot.parkingSpots import spot_list
+from core.cropSettings import (crop_x, crop_y, crop_h, crop_w)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -44,7 +44,7 @@ def has_car(mask,spot):
     percent=common/spot_n
    
     spot[spot==2]=0
-    if(percent>0.40):
+    if(percent>0.30):
         return True
     else:
         return False
@@ -76,82 +76,57 @@ def find_cars(image_path):
     # Load pre-trained model
     model.load_weights(coco_model_path, by_name=True)
 
-    parked_car_boxes = None
     rgb = cv2.imread(image_path)
-    rgb = imutils.rotate(rgb, 3)
-    x = 0
-    y = 700
-    h = 710
-    w = 1850
-    crop = rgb[y:y+h, x:x+w]
+    crop = rgb[crop_y:crop_y+crop_h, crop_x:crop_x+crop_w]
 
     # Run the image through the Mask R-CNN model to get results.
     results = model.detect([crop], verbose=0)
 
     # Mask R-CNN assumes we are running detection on multiple images.
     # We only passed in one image to detect, so only grab the first result.
-    r = results[0]
-
     # The r variable will now have the results of detection:
-    # - r['rois'] are the bounding box of each detected object
-    # - r['class_ids'] are the class id (type) of each detected object
-    # - r['scores'] are the confidence scores for each detection
-    # - r['masks'] are the object masks for each detected object (which gives you the object outline)
+    r = results[0]
 
     # Filter the results to only grab the car / truck bounding boxes
     car_boxes = get_car_boxes(r['rois'], r['class_ids'])
 
-    print("Cars found in photo:")
-
+    # print("Cars found in photo:")
     # Draw each box on the frame
-    for box in car_boxes:
-        print("Car: ", box)
+    # for box in car_boxes:
+    #     print("Car: ", box)
+    #     y1, x1, y2, x2 = box
+    #     cv2.rectangle(crop, (x1, y1), (x2, y2), (0, 255, 0), 1)
 
-        #y1, x1, y2, x2 = box
-
-        # Draw the box
-        #cv2.rectangle(crop, (x1, y1), (x2, y2), (0, 255, 0), 1)
-
-    #cv2.imwrite(image_path, crop)
-    # cv2.destroyAllWindows()
-    # Image('car_output.jpg')
-    # return 'car_output.jpg'
     gray_image = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
-#    loop over of the detected object's bounding boxes and masks
 
-    #spotList=spots.spot_list
-    spotMaskList=[]
+    # Get the all the spots in the parking lot
+    emptySpots=[]
     for i in spot_list:
-        mask=get_mask_array_of_parking_spot(gray_image, i, 1) # 255 shows up as white on image 
-        spotMaskList.append(mask)
+        mask=get_mask_array_of_parking_spot(gray_image, i)
+        emptySpots.append(mask)
 
     fullSpots=[]
-    emptySpots=[]
-    maskList=[]
-    index1=[]
+    # loop over of the detected object's bounding boxes and masks
     for i in range(0, r["rois"].shape[0]):
-        # extract the class ID and mask for the current detection, then
+        # extract the mask for the current detection, then
         # grab the color to visualize the mask (in BGR format)
-        classID = r["class_ids"][i]
-        mask = r["masks"][:, :, i]
-        maskList.append(mask)
-        for j in spotMaskList:
-            if has_car(mask,j):
-                fullSpots.append(j)
-                spotMaskList.remove(j)
+        carMask = r["masks"][:, :, i]
+
+        # Highlight found car
+        crop = visualize.apply_mask(crop, carMask,[1,0,0], alpha=0.5)
+
+        for index in range(len(emptySpots)):
+            if has_car(carMask,emptySpots[index]):
+                fullSpots.append(emptySpots.pop(index))
                 break
         
-
-    emptySpots=spotMaskList
-
-    # loop over of the detected object's bounding boxes and masks
-    color1=[0,0,1]
-    color2=[0,1,0]
+    red=[0,0,1]
+    green=[0,1,0]
     new_image = crop
     for i in fullSpots:
-        new_image = visualize.apply_mask(crop, i,color1, alpha=1)
+        new_image = visualize.apply_mask(crop, i,red, alpha=0.5)
 
     for i in emptySpots:
-        new_image = visualize.apply_mask(new_image, i,color2, alpha=1)  
+        new_image = visualize.apply_mask(new_image, i,green, alpha=0.5)  
         
     cv2.imwrite(image_path, new_image)
