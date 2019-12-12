@@ -136,7 +136,7 @@ def find_cars(image_object):
 
     maskedImageDescription = image_object.description + '_masked'
     maskedParkingLotname = maskedImageDescription + ".jpg"
-    maskedParkingLotpath = "media/images/"+maskedParkingLotname
+    maskedParkingLotpath = "images/"+maskedParkingLotname
 
     try:
         oldImageMasked = Image.objects.get(description = maskedImageDescription)
@@ -147,5 +147,5 @@ def find_cars(image_object):
 
     print(maskedParkingLotpath)
     cv2.imwrite(maskedParkingLotpath, newImage)
-    maskedParkingLot = Image(description= maskedImageDescription, image = maskedParkingLotpath)
+    maskedParkingLot = Image(description= maskedImageDescription, image = maskedParkingLotname)
     maskedParkingLot.save()
