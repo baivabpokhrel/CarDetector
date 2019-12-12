@@ -6,6 +6,7 @@ from mrcnn import visualize
 import mrcnn.utils
 from mrcnn.model import MaskRCNN
 from core.models import Image
+from openSpotServer.settings import MEDIA_ROOT
 import sys
 sys.path.insert(0,'..')
 
@@ -135,8 +136,8 @@ def find_cars(image_object):
 
 
     maskedImageDescription = image_object.description + '_masked'
-    maskedParkingLotname = maskedImageDescription + ".jpg"
-    maskedParkingLotpath = "images/"+maskedParkingLotname
+    maskedParkingLotName = maskedImageDescription + ".jpg"
+    maskedParkingLotPath = os.path.join(MEDIA_ROOT, "images/", maskedParkingLotName)
 
     try:
         oldImageMasked = Image.objects.get(description = maskedImageDescription)
@@ -145,7 +146,7 @@ def find_cars(image_object):
     except Image.DoesNotExist:
         print("Saving new image")
 
-    print(maskedParkingLotpath)
-    cv2.imwrite(maskedParkingLotpath, newImage)
-    maskedParkingLot = Image(description= maskedImageDescription, image = maskedParkingLotname)
+    print(maskedParkingLotPath)
+    cv2.imwrite(maskedParkingLotPath, newImage)
+    maskedParkingLot = Image(description= maskedImageDescription, image = "images/" + maskedParkingLotName)
     maskedParkingLot.save()
