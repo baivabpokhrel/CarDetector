@@ -5,6 +5,7 @@ import mrcnn.config
 from mrcnn import visualize
 import mrcnn.utils
 from mrcnn.model import MaskRCNN
+from core.models import Image
 from IPython.display import Image
 import sys
 sys.path.insert(0,'..')
@@ -62,7 +63,9 @@ def get_car_boxes(boxes, class_ids):
     return np.array(current_car_boxes)
 
 
-def find_cars(image_path):
+def find_cars(image_object):
+
+    image_path = image_object.image.path
 
     # Directory to save logs and trained model
     model_dir = os.path.join(os.path.join(BASE_DIR, 'carDetection'), "logs")
@@ -123,11 +126,22 @@ def find_cars(image_path):
         
     red=[0,0,1]
     green=[0,1,0]
-    new_image = crop
+    newImage = crop
+
     for i in fullSpots:
-        new_image = visualize.apply_mask(crop, i,red, alpha=0.5)
+        newImage = visualize.apply_mask(newImage, i,red, alpha=0.5)
 
     for i in emptySpots:
-        new_image = visualize.apply_mask(new_image, i,green, alpha=0.5)  
-        
-    cv2.imwrite(image_path + "_masked", new_image)
+        newImage = visualize.apply_mask(newImage, i,green, alpha=0.5) 
+
+    maskedParkingLot = Image(description= image_object.description + "_masked", image = new_image)
+
+    try:
+        oldImageMasked = Image.objects.get(description = image_object.description + "_masked")
+        oldImageMasked.image.delete()
+        oldImageMasked.delete()
+        maskedParkingLot.save()
+    except Image.DoesNotExist:
+        maskedParkingLot.save()
+
+    # cv2.imwrite(image_path[:len(image_path)-4] + "_masked.jpg", new_image)

@@ -34,7 +34,7 @@ def model_form_upload(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             image_object = upsert(form)
-            find_cars(image_object.image.path)
+            find_cars(image_object)
             return redirect('home')
     else:
         form = ImageForm()
