@@ -44,7 +44,7 @@ def has_car(mask,spot):
     percent=common/spot_n
    
     spot[spot==2]=0
-    if(percent>0.30):
+    if(percent>0.10):
         return True
     else:
         return False
