@@ -17,9 +17,16 @@ def home(request):
 
 
 def custom_save(image_form):
-    image = image_form.save(commit=False)
-    image.save()
-    return image
+    new_image = image_form.save(commit=False)
+    try:
+        old_image = Image.objects.get(description = new_image.description)
+        old_image.image.delete()
+        old_image.delete()
+        new_image.save()
+    except Image.DoesNotExist:
+        new_image.save()
+
+    return new_image
 
 
 def model_form_upload(request):
