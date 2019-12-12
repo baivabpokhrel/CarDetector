@@ -16,7 +16,7 @@ def home(request):
     return render(request, 'home.html', {'images': images})
 
 
-def custom_save(image_form):
+def upsert(image_form):
     new_image = image_form.save(commit=False)
     try:
         old_image = Image.objects.get(description = new_image.description)
@@ -33,7 +33,7 @@ def model_form_upload(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
-            image_object = custom_save(form)
+            image_object = upsert(form)
             find_cars(image_object.image.path)
             return redirect('home')
     else:
