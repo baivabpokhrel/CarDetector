@@ -48,4 +48,5 @@ while True :
         upload_image()
     except requests.exceptions.ConnectionError:
         print("Error uploading")
+    print("---------------")
     sleep(30)

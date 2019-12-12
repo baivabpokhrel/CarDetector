@@ -6,7 +6,6 @@ from mrcnn import visualize
 import mrcnn.utils
 from mrcnn.model import MaskRCNN
 from core.models import Image
-from IPython.display import Image
 import sys
 sys.path.insert(0,'..')
 
@@ -135,17 +134,17 @@ def find_cars(image_object):
         newImage = visualize.apply_mask(newImage, i,green, alpha=0.5) 
 
 
-    print(description)
     maskedImageDescription = image_object.description + '_masked'
-    print(newDescription)
-    maskedParkingLot = Image(description= maskedImageDescription, image = newImage)
+    maskedParkingLotpath = maskedParkingLot + ".jpg"
 
     try:
         oldImageMasked = Image.objects.get(description = maskedImageDescription)
         oldImageMasked.image.delete()
         oldImageMasked.delete()
-        maskedParkingLot.save()
     except Image.DoesNotExist:
-        maskedParkingLot.save()
+        print("Saving new image")
 
-    # cv2.imwrite(image_path[:len(image_path)-4] + "_masked.jpg", new_image)
+    cv2.imwrite(maskedParkingLotpath, new_image)
+    maskedParkingLot = Image(description= maskedImageDescription, image = maskedParkingLotpath)
+    maskedParkingLot.save()
+
