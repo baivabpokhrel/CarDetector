@@ -5,7 +5,7 @@ import mrcnn.config
 from mrcnn import visualize
 import mrcnn.utils
 from mrcnn.model import MaskRCNN
-from core.models import Image
+from core.models import (Image, Stats)
 from openSpotServer.settings import MEDIA_ROOT
 import sys
 sys.path.insert(0,'..')
@@ -29,7 +29,7 @@ class MaskRCNNConfig(mrcnn.config.Config):
 inputs:
     mask : It is a matrix of mask for the single car in which pixles are set to true if there is mask else to false
     spot : It is a matrix for a single spot which is given a value of 1 where the spot is, and 0 where it isn't
-    
+
 output:
     true: if the mask is in the spot
     false: if the mask is not in the spot
@@ -43,13 +43,13 @@ def has_car(mask,spot):
     spot_n=(spot==1).sum()
     # calculting the percentage
     percent=common/spot_n
-   
+
     spot[spot==2]=0
     if(percent>0.10):
         return True
     else:
         return False
-    
+
 
 # Filter a list of Mask R-CNN detection results to get only the detected cars / trucks
 def get_car_boxes(boxes, class_ids):
@@ -123,7 +123,7 @@ def find_cars(image_object):
             if has_car(carMask,emptySpots[index]):
                 fullSpots.append(emptySpots.pop(index))
                 break
-        
+
     red=[0,0,1]
     green=[0,1,0]
     newImage = crop
@@ -132,7 +132,7 @@ def find_cars(image_object):
         newImage = visualize.apply_mask(newImage, i,red, alpha=0.5)
 
     for i in emptySpots:
-        newImage = visualize.apply_mask(newImage, i,green, alpha=0.5) 
+        newImage = visualize.apply_mask(newImage, i,green, alpha=0.5)
 
 
     maskedImageDescription = image_object.description + '_masked'
@@ -148,5 +148,10 @@ def find_cars(image_object):
 
     print(maskedParkingLotPath)
     cv2.imwrite(maskedParkingLotPath, newImage)
-    maskedParkingLot = Image(description= maskedImageDescription, image = "images/" + maskedParkingLotName)
+    maskedParkingLot = Image(description= maskedImageDescription, image = "images/" + maskedParkingLotName, masked = True)
     maskedParkingLot.save()
+    # breakpoint()
+    stat = Stats.objects.first()
+    stat.openSpots = len(emptySpots)
+    stat.totalSpots = len(fullSpots) + len(emptySpots)
+    stat.save()
