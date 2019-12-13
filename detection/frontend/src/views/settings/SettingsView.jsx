@@ -1,8 +1,8 @@
 import React from 'react';
 
-const SettingsView = ({}) => (
+const SettingsView = () => (
   <div>
-Settings
+    Settings
     <ul>
       <li>Some Settings item</li>
       <li>Some Settings item</li>
