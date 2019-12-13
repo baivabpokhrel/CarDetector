@@ -24,6 +24,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('index', views.index, name='index'),
     path('model_form_upload', views.model_form_upload, name='model_form_upload'),
+    path('api', views.api, name='api')
 ]
 
 if settings.DEBUG:
