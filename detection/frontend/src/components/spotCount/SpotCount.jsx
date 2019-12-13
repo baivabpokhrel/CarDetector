@@ -5,16 +5,18 @@ const Counter = styled('h2')`
 font-size: 35px;
 color: blue;
 `
-const SpotCount  = ({count}) => {
-  return(
+const SpotCount = ({ availableSpots, totalSpots }) => {
+  return (
     <div>
-    <h1>Spots</h1>
-    <Counter>{count}</Counter>
+      <h1>Available Spots</h1>
+      <Counter>{availableSpots} / {totalSpots} </Counter>
     </div>
   )
 }
 
 SpotCount.propTypes = {
-  count: PropTypes.number
+  availableSpots: PropTypes.number,
+  totalSpots: PropTypes.number
+
 }
 export default SpotCount;

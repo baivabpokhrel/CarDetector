@@ -1,17 +1,28 @@
-import React, { useState } from 'react';
-import { SpotCount } from '../../components';
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios'
 
-const HomeView = ({}) => {
-  const [count, setCount] = useState(0);
+import { SpotCount, Image } from '../../components';
+
+const baseUrl = 'http://127.0.0.1:8000';
+const HomeView = ({ }) => {
+  const [data, setData] = useState({});
+  useEffect(() => {
+    const request = async () => {
+      const result = await Axios(
+        `${baseUrl}/api`,
+      );
+
+      setData(result.data)
+    }
+    request()
+  }, []);
+  const { image, imageMasked, availableSpots, totalSpots } = data;
+  // console.log(response)
   return (
     <div>
-      Home
-      <div>
-        <button onClick={() => setCount(count + 1)}>+</button>
-        <button onClick={() => setCount(count - 1)}>-</button>
+      <Image srcBefore={baseUrl + image} srcAfter={baseUrl + imageMasked} style={{ width: '40vw' }} />
 
-        <SpotCount count={count} />
-      </div>
+      <SpotCount availableSpots={availableSpots} totalSpots={totalSpots} />
     </div>
   );
 };
