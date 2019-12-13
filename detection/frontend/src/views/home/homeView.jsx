@@ -4,7 +4,7 @@ import Axios from 'axios'
 import { SpotCount, Image } from '../../components';
 
 const baseUrl = 'http://127.0.0.1:8000';
-const HomeView = ({ }) => {
+const HomeView = () => {
   const [data, setData] = useState({});
   useEffect(() => {
     const request = async () => {
