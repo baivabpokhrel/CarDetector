@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
-const Selector  = ({lots, onClick}) => {
-  return(
+const Selector = ({ lots, onClick }) => {
+  return (
     <div>
 
-<select>
-{  lots.map(lot =>
-    <option value={lot.id}>{lot.name}</option>
-  )}
-</select>
+      <select>
+        {lots.map(lot =>
+          <option value={lot.id}>{lot.name}</option>
+        )}
+      </select>
 
 
     </div>
@@ -26,4 +25,4 @@ Selector.propTypes = {
     )
   )
 }
-  export default Selector;
+export default Selector;
