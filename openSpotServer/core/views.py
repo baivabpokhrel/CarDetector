@@ -63,6 +63,8 @@ def api(request):
     'totalSpots': stat.totalSpots,
     'updatedAt': stat.updatedAt,
     'image': image.image.url,
-    'imageMasked': imageMasked.image.url
+    'imageMasked': imageMasked.image.url,
+    'openSpotsList':stat.openSpotsList,
+    'takenSpotsList':stat.takenSpotsList
     }
     return JsonResponse(data)

@@ -104,12 +104,15 @@ def find_cars(image_object):
     gray_image = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
 
     # Get the all the spots in the parking lot
-    emptySpots=[]
+    emptySpotsMask=[]
+    emptySpotsList=[]
+    fullSpotsMask=[]
+    fullSpotsList=[]
     for i in spot_list:
-        mask=get_mask_array_of_parking_spot(gray_image, i)
-        emptySpots.append(mask)
+        mask=get_mask_array_of_parking_spot(gray_image, i[1])
+        emptySpotsMask.append(mask)
+        emptySpotsList.append(i[0])
 
-    fullSpots=[]
     # loop over of the detected object's bounding boxes and masks
     for i in range(0, r["rois"].shape[0]):
         # extract the mask for the current detection, then
@@ -119,19 +122,20 @@ def find_cars(image_object):
         # Highlight found car
         crop = visualize.apply_mask(crop, carMask,[1,0,0], alpha=0.5)
 
-        for index in range(len(emptySpots)):
-            if has_car(carMask,emptySpots[index]):
-                fullSpots.append(emptySpots.pop(index))
+        for index in range(len(emptySpotsMask)):
+            if has_car(carMask,emptySpotsMask[index]):
+                fullSpotsMask.append(emptySpotsMask.pop(index))
+                fullSpotsList.append(emptySpotsList.pop(index))
                 break
 
     red=[0,0,1]
     green=[0,1,0]
     newImage = crop
 
-    for i in fullSpots:
+    for i in fullSpotsMask:
         newImage = visualize.apply_mask(newImage, i,red, alpha=0.5)
 
-    for i in emptySpots:
+    for i in emptySpotsMask:
         newImage = visualize.apply_mask(newImage, i,green, alpha=0.5)
 
 
@@ -153,9 +157,15 @@ def find_cars(image_object):
     # breakpoint()
     stat = Stats.objects.first()
     if(stat == None):
-        stat = Stats(openSpots = len(emptySpots), totalSpots = len(fullSpots) + len(emptySpots))
+        stat = Stats(
+            openSpots = len(emptySpotsMask), 
+            totalSpots = len(fullSpotsMask) + len(emptySpotsMask),
+            openSpotsList = emptySpotsList,
+            takenSpotsList = fullSpotsList)
     else:
-        stat.openSpots = len(emptySpots)
-        stat.totalSpots = len(fullSpots) + len(emptySpots)
+        stat.openSpots = len(emptySpotsMask)
+        stat.totalSpots = len(fullSpotsMask) + len(emptySpotsMask)
+        stat.openSpotsList = emptySpotsList
+        stat.takenSpotsList = fullSpotsList
     
     stat.save()
