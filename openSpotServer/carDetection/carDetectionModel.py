@@ -152,6 +152,10 @@ def find_cars(image_object):
     maskedParkingLot.save()
     # breakpoint()
     stat = Stats.objects.first()
-    stat.openSpots = len(emptySpots)
-    stat.totalSpots = len(fullSpots) + len(emptySpots)
+    if(stat == None):
+        stat = Stats(openSpots = len(emptySpots), totalSpots = len(fullSpots) + len(emptySpots))
+    else:
+        stat.openSpots = len(emptySpots)
+        stat.totalSpots = len(fullSpots) + len(emptySpots)
+    
     stat.save()
