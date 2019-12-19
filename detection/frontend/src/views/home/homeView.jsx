@@ -20,11 +20,11 @@ const HomeView = () => {
     setInterval(async () => await request(), 30000)
   }, []);
   const { image, imageMasked, availableSpots, totalSpots, openSpotsList, takenSpotsList } = data;
-  console.log(openSpotsList)
+  let timestamp = new Date().getTime();
   // console.log(response)
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-      <Image srcBefore={baseUrl + image} srcAfter={baseUrl + imageMasked} style={{ width: '40vw', height: 'calc(40vw/1.92)' }} />
+      <Image srcBefore={baseUrl + image + `?=${timestamp}`} srcAfter={baseUrl + imageMasked + `?=${timestamp}`} style={{ width: '40vw', height: 'calc(40vw/1.92)' }} />
 
       <SpotCount availableSpots={availableSpots} totalSpots={totalSpots} />
       <SpotList openSpotsList={typeof openSpotsList == 'string' && JSON.parse(openSpotsList)} takenSpotsList={typeof takenSpotsList == 'string' && JSON.parse(takenSpotsList)} />
