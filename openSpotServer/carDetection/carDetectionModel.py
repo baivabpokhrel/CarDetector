@@ -79,9 +79,8 @@ def find_cars(image_object):
     # Load pre-trained model
     model.load_weights(coco_model_path, by_name=True)
 
-    rgb = cv2.imread(image_path)
-    crop = rgb[crop_y:crop_y+crop_h, crop_x:crop_x+crop_w]
-    cv2.imwrite(image_path, crop)
+    crop = cv2.imread(image_path)
+
 
     # Run the image through the Mask R-CNN model to get results.
     results = model.detect([crop], verbose=0)
@@ -158,7 +157,7 @@ def find_cars(image_object):
     stat = Stats.objects.first()
     if(stat == None):
         stat = Stats(
-            openSpots = len(emptySpotsMask), 
+            openSpots = len(emptySpotsMask),
             totalSpots = len(fullSpotsMask) + len(emptySpotsMask),
             openSpotsList = emptySpotsList,
             takenSpotsList = fullSpotsList)
@@ -167,5 +166,5 @@ def find_cars(image_object):
         stat.totalSpots = len(fullSpotsMask) + len(emptySpotsMask)
         stat.openSpotsList = emptySpotsList
         stat.takenSpotsList = fullSpotsList
-    
+
     stat.save()
