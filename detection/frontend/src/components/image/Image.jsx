@@ -5,7 +5,7 @@ const Image = ({ srcBefore, srcAfter, ...props }) => {
 
   return (
     <div className={styles.image} {...props}>
-      <img src={visibleImage ? srcBefore : srcAfter} {...props} onClick={() => setVisibleImage(!visibleImage)} alt={visibleImage ? "Parking Lot image" : "Parking lot image with overlay"} />
+      <img src={visibleImage ? srcBefore : srcAfter} {...props} onClick={() => setVisibleImage(!visibleImage)} />
     </div>
   )
 }
