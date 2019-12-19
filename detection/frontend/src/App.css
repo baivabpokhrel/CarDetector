@@ -17,6 +17,13 @@
   color: white;
 } */
 
+body {
+  background-color: #222831
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
 .App-link {
   color: #09d3ac;
 }

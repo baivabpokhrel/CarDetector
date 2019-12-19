@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled'
 import { Meter, Box, Text, Stack } from 'grommet'
 const SpotCount = ({ availableSpots, totalSpots }) => {
   const [active, setActive] = useState();

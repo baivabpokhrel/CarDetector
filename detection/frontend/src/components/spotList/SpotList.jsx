@@ -21,7 +21,7 @@ const ListItem = ({ item }) => {
       <span>
         -
      </span>
-      <Text bold color={item.status == 'Available' ? '#4CAF50' : '#D32F2F'}>
+      <Text bold color={item.status === 'Available' ? '#4CAF50' : '#D32F2F'}>
         {item.status}
       </Text>
     </li>
@@ -42,14 +42,16 @@ const SpotList = ({ openSpotsList, takenSpotsList }) => {
   }
   const sortedSpots = sortSpots(openSpotsList, takenSpotsList)
   return (
-    <List
-      primaryKey="spotNumber"
-      secondaryKey="status"
-      data={sortedSpots}
-      children={(item, index) => {
-        return (<ListItem item={item} />)
-      }}
-    />
+    <div style={{ height: '20vh', overflowY: 'scroll' }}>
+      <List
+        primaryKey="spotNumber"
+        secondaryKey="status"
+        data={sortedSpots}
+        children={(item, index) => {
+          return (<ListItem item={item} />)
+        }}
+      />
+    </div>
   )
 }
 

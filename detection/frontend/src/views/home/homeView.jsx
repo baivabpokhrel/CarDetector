@@ -7,19 +7,17 @@ import { SpotCount, Image, SpotList } from '../../components';
 const baseUrl = 'http://35.245.136.196:81'
 const HomeView = () => {
   const [data, setData] = useState({});
+  const request = async () => {
+    const result = await Axios(
+      `${baseUrl}/api`,
+    );
+
+    setData(result.data)
+  }
+
   useEffect(() => {
-
-    const request = async () => {
-      const result = await Axios(
-        `${baseUrl}/api`,
-      );
-
-      setData(result.data)
-    }
-    const timer = setTimeout(() => {
-      request()
-    }, 3000);
-    return () => clearTimeout(timer);
+    request()
+    setInterval(async () => await request(), 30000)
   }, []);
   const { image, imageMasked, availableSpots, totalSpots, openSpotsList, takenSpotsList } = data;
   console.log(openSpotsList)
