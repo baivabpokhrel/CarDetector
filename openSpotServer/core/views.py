@@ -1,9 +1,10 @@
 from django.http import (HttpResponse, HttpResponseServerError)
 from django.shortcuts import render, redirect
+import cv2
 from carDetection.carDetectionModel import find_cars
 from django.http import JsonResponse
 from core.models import (Image, Stats)
-
+from core.cropSettings import (crop_x, crop_y, crop_h, crop_w)
 from core.forms import ImageForm
 
 
@@ -36,6 +37,10 @@ def model_form_upload(request):
         form = ImageForm(request.POST, request.FILES)
         if form.is_valid():
             image_object = upsert(form)
+            image_path = image_object.image.path
+            rgb = cv2.imread(image_path)
+            crop = rgb[crop_y:crop_y+crop_h, crop_x:crop_x+crop_w]
+            cv2.imwrite(image_path, crop)
             find_cars(image_object)
             return redirect('home')
     else:
