@@ -25,7 +25,7 @@ SECRET_KEY = '!gjrfqo2=&p2pgmmry8c^h&vfylbpneawcn28@u#xvn%-is!@9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['35.245.175.140', '127.0.0.1']
+ALLOWED_HOSTS = ['35.245.136.196', '127.0.0.1']
 
 
 # Application definition
@@ -56,10 +56,10 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
+    'http://localhost:3000','http://http://35.245.136.196'
 ]
 CORS_ORIGIN_REGEX_WHITELIST = [
-    'http://localhost:3000',
+    'http://localhost:3000', 'http://35.245.136.196'
 ]
 ROOT_URLCONF = 'openSpotServer.urls'
 
