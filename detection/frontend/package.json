@@ -8,10 +8,14 @@
     "@types/react": "^16.9.11",
     "axios": "^0.19.0",
     "emotion": "^10.0.17",
+    "grommet": "^2.9.0",
+    "grommet-icons": "^4.4.0",
+    "js-cookie": "^2.2.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
+    "styled-components": "^4.4.1",
     "typescript": "^3.6.4"
   },
   "scripts": {
